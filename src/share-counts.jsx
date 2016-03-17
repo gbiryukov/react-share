@@ -6,7 +6,8 @@ import {
   getGooglePlusShareCount,
   getLinkedinShareCount,
   getPinterestShareCount,
-  getVkontakteShareCount
+  getVkontakteShareCount,
+  getOdnoklassnikiShareCount
 } from './share-count-getters';
 
 
@@ -78,6 +79,9 @@ export const LinkedinShareCount = shareCountFactory(getLinkedinShareCount);
 export const GooglePlusShareCount = shareCountFactory(getGooglePlusShareCount);
 export const PinterestShareCount = shareCountFactory(getPinterestShareCount);
 export const VkontakteShareCount = shareCountFactory(getVkontakteShareCount);
+export const OdnoklassnikiShareCount = shareCountFactory(
+  getOdnoklassnikiShareCount
+);
 export const TwitterShareCount = () => {
   throw new Error('TwitterShareCount was removed in version 1.3.0 because' +
     'the Twitter API was shut down and there is no replacement. Please ' +

@@ -97,3 +97,20 @@ export function getVkontakteShareCount(shareUrl, callback) {
     index: 0
   }));
 }
+
+export function getOdnoklassnikiShareCount(shareUrl, callback) {
+  const url = '//connect.ok.ru/dk';
+
+  window.ODKL = {
+    updateCount(_, rowCount) {
+      const count = parseInt(rowCount, 10);
+      callback(!!count ? count : undefined);
+    }
+  };
+
+  return jsonp(url + objectToGetParams({
+    ref: shareUrl,
+    uid: 0,
+    'st.cmd': 'extLike'
+  }));
+}

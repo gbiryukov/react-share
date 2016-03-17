@@ -10,14 +10,16 @@ const {
   GooglePlusShareButton,
   LinkedinShareButton,
   TwitterShareButton,
-  VkontakteShareButton
+  VkontakteShareButton,
+  OdnoklassnikiShareButton
 } = ShareButtons;
 
 const {
   FacebookShareCount,
   GooglePlusShareCount,
   LinkedinShareCount,
-  VkontakteShareCount
+  VkontakteShareCount,
+  OdnoklassnikiShareCount
 } = ShareCounts;
 
 const FacebookIcon = generateShareIcon('facebook');
@@ -110,6 +112,21 @@ const Demo = React.createClass({
             className="Demo__some-network__share-count">
             {count => count}
           </VkontakteShareCount>
+        </div>
+
+        <div className="Demo__some-network">
+          <OdnoklassnikiShareButton
+            url={shareUrl}
+            title={title}
+            className="Demo__some-network__share-button">
+            <button>ok</button>
+          </OdnoklassnikiShareButton>
+
+          <OdnoklassnikiShareCount
+            url={shareUrl}
+            className="Demo__some-network__share-count">
+            {count => count}
+          </OdnoklassnikiShareCount>
         </div>
       </div>
     );

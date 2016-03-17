@@ -67,3 +67,14 @@ export function vkontakte(url) {
 
   return `http://vk.com/share.php` + objectToGetParams({url});
 }
+
+export function odnoklassniki(url) {
+  assertProvided(url, 'odnoklassniki');
+  const params = {
+    'st._surl': url,
+    'st.cmd': 'addShare',
+    'st.s': 1
+  };
+
+  return `http://www.odnoklassniki.ru/dk` + objectToGetParams(params);
+}
