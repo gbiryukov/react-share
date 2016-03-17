@@ -10,6 +10,8 @@ exports.googlePlus = googlePlus;
 exports.linkedin = linkedin;
 exports.pinterest = pinterest;
 exports.vkontakte = vkontakte;
+exports.odnoklassniki = odnoklassniki;
+exports.myMail = myMail;
 
 var _utils = require('./utils');
 
@@ -80,4 +82,21 @@ function vkontakte(url) {
   assertProvided(url, 'vkontakte');
 
   return 'http://vk.com/share.php' + (0, _utils.objectToGetParams)({ url: url });
+}
+
+function odnoklassniki(url) {
+  assertProvided(url, 'odnoklassniki');
+  var params = {
+    'st._surl': url,
+    'st.cmd': 'addShare',
+    'st.s': 1
+  };
+
+  return 'http://www.odnoklassniki.ru/dk' + (0, _utils.objectToGetParams)(params);
+}
+
+function myMail(url) {
+  assertProvided(url, 'myMail');
+
+  return '//connect.mail.ru/share' + (0, _utils.objectToGetParams)({ url: url });
 }

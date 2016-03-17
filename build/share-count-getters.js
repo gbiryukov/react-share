@@ -7,6 +7,9 @@ exports.getFacebookShareCount = getFacebookShareCount;
 exports.getGooglePlusShareCount = getGooglePlusShareCount;
 exports.getLinkedinShareCount = getLinkedinShareCount;
 exports.getPinterestShareCount = getPinterestShareCount;
+exports.getVkontakteShareCount = getVkontakteShareCount;
+exports.getOdnoklassnikiShareCount = getOdnoklassnikiShareCount;
+exports.getMyMailShareCount = getMyMailShareCount;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -87,5 +90,58 @@ function getPinterestShareCount(shareUrl, callback) {
     url: shareUrl
   }), function (err, data) {
     callback(!!data ? data.count : undefined);
+  });
+}
+
+function getVkontakteShareCount(shareUrl, callback) {
+  var url = '//vk.com/share.php';
+
+  window.VK = {
+    Share: {
+      count: function count(_, _count) {
+        callback(!!_count ? _count : undefined);
+      }
+    }
+  };
+
+  return (0, _jsonp2['default'])(url + (0, _utils.objectToGetParams)({
+    url: shareUrl,
+    act: 'count',
+    index: 0
+  }));
+}
+
+function getOdnoklassnikiShareCount(shareUrl, callback) {
+  var url = '//connect.ok.ru/dk';
+
+  window.ODKL = {
+    updateCount: function updateCount(_, rowCount) {
+      var count = parseInt(rowCount, 10);
+      callback(!!count ? count : undefined);
+    }
+  };
+
+  return (0, _jsonp2['default'])(url + (0, _utils.objectToGetParams)({
+    ref: shareUrl,
+    uid: 0,
+    'st.cmd': 'extLike'
+  }));
+}
+
+function getMyMailShareCount(shareUrl, callback) {
+  var url = '//connect.mail.ru/share_count';
+
+  return (0, _jsonp2['default'])(url + (0, _utils.objectToGetParams)({
+    url_list: shareUrl,
+    callback: 1
+  }), { param: 'func' }, function (err, data) {
+    var count = 0;
+    var shareData = data[Object.keys(data)[0]];
+
+    if (shareData) {
+      count = shareData.shares;
+    }
+
+    callback(!!count ? count : undefined);
   });
 }

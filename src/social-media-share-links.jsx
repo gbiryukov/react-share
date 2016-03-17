@@ -78,3 +78,9 @@ export function odnoklassniki(url) {
 
   return `http://www.odnoklassniki.ru/dk` + objectToGetParams(params);
 }
+
+export function myMail(url) {
+  assertProvided(url, 'myMail');
+
+  return `//connect.mail.ru/share` + objectToGetParams({url});
+}

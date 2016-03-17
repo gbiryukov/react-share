@@ -86,6 +86,12 @@ var GooglePlusShareCount = shareCountFactory(_shareCountGetters.getGooglePlusSha
 exports.GooglePlusShareCount = GooglePlusShareCount;
 var PinterestShareCount = shareCountFactory(_shareCountGetters.getPinterestShareCount);
 exports.PinterestShareCount = PinterestShareCount;
+var VkontakteShareCount = shareCountFactory(_shareCountGetters.getVkontakteShareCount);
+exports.VkontakteShareCount = VkontakteShareCount;
+var OdnoklassnikiShareCount = shareCountFactory(_shareCountGetters.getOdnoklassnikiShareCount);
+exports.OdnoklassnikiShareCount = OdnoklassnikiShareCount;
+var MyMailShareCount = shareCountFactory(_shareCountGetters.getMyMailShareCount);
+exports.MyMailShareCount = MyMailShareCount;
 var TwitterShareCount = function TwitterShareCount() {
   throw new Error('TwitterShareCount was removed in version 1.3.0 because' + 'the Twitter API was shut down and there is no replacement. Please ' + 'remove it from your code.');
 };

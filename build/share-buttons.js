@@ -177,4 +177,50 @@ var VkontakteShareButton = _react2['default'].createClass({
       className: 'SocialMediaShareButton--vkontakte' + (' ' + (this.props.className || '')) }));
   }
 });
+
 exports.VkontakteShareButton = VkontakteShareButton;
+var OdnoklassnikiShareButton = _react2['default'].createClass({
+  displayName: 'OdnoklassnikiShareButton',
+
+  propTypes: {
+    className: _react2['default'].PropTypes.string,
+    children: _react2['default'].PropTypes.node.isRequired,
+    title: _react2['default'].PropTypes.string.isRequired,
+    url: _react2['default'].PropTypes.string.isRequired
+  },
+
+  render: function render() {
+    var _props6 = this.props;
+    var url = _props6.url;
+    var title = _props6.title;
+
+    return _react2['default'].createElement(SocialMediaShareButton, _extends({
+      link: (0, _socialMediaShareLinks.odnoklassniki)(url, title)
+    }, this.props, {
+      className: 'SocialMediaShareButton--odnoklassniki' + (' ' + (this.props.className || '')) }));
+  }
+});
+
+exports.OdnoklassnikiShareButton = OdnoklassnikiShareButton;
+var MyMailShareButton = _react2['default'].createClass({
+  displayName: 'MyMailShareButton',
+
+  propTypes: {
+    className: _react2['default'].PropTypes.string,
+    children: _react2['default'].PropTypes.node.isRequired,
+    title: _react2['default'].PropTypes.string.isRequired,
+    url: _react2['default'].PropTypes.string.isRequired
+  },
+
+  render: function render() {
+    var _props7 = this.props;
+    var url = _props7.url;
+    var title = _props7.title;
+
+    return _react2['default'].createElement(SocialMediaShareButton, _extends({
+      link: (0, _socialMediaShareLinks.myMail)(url, title)
+    }, this.props, {
+      className: 'SocialMediaShareButton--mymail' + (' ' + (this.props.className || '')) }));
+  }
+});
+exports.MyMailShareButton = MyMailShareButton;

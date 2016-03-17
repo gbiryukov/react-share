@@ -8,7 +8,8 @@ import {
   pinterest,
   twitter,
   vkontakte,
-  odnoklassniki
+  odnoklassniki,
+  myMail
 } from './social-media-share-links';
 import { windowOpen } from './utils';
 
@@ -198,7 +199,31 @@ export const OdnoklassnikiShareButton = React.createClass({
       <SocialMediaShareButton
         link={odnoklassniki(url, title)}
         {...this.props}
-        className={'SocialMediaShareButton--vkontakte' +
+        className={'SocialMediaShareButton--odnoklassniki' +
+          ` ${this.props.className || ''}`} />
+    );
+  }
+});
+
+export const MyMailShareButton = React.createClass({
+  propTypes: {
+    className: React.PropTypes.string,
+    children: React.PropTypes.node.isRequired,
+    title: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
+  },
+
+  render() {
+    const {
+      url,
+      title
+    } = this.props;
+
+    return (
+      <SocialMediaShareButton
+        link={myMail(url, title)}
+        {...this.props}
+        className={'SocialMediaShareButton--mymail' +
           ` ${this.props.className || ''}`} />
     );
   }

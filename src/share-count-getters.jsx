@@ -114,3 +114,21 @@ export function getOdnoklassnikiShareCount(shareUrl, callback) {
     'st.cmd': 'extLike'
   }));
 }
+
+export function getMyMailShareCount(shareUrl, callback) {
+  const url = '//connect.mail.ru/share_count';
+
+  return jsonp(url + objectToGetParams({
+    url_list: shareUrl,
+    callback: 1
+  }), {param: 'func'}, (err, data) => {
+    let count = 0;
+    const shareData = data[Object.keys(data)[0]];
+
+    if (shareData) {
+      count = shareData.shares;
+    }
+
+    callback(!!count ? count : undefined);
+  });
+}
