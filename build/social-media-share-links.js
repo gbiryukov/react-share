@@ -9,6 +9,7 @@ exports.facebook = facebook;
 exports.googlePlus = googlePlus;
 exports.linkedin = linkedin;
 exports.pinterest = pinterest;
+exports.vkontakte = vkontakte;
 
 var _utils = require('./utils');
 
@@ -73,4 +74,10 @@ function pinterest(url, media) {
     url: url,
     media: media
   });
+}
+
+function vkontakte(url) {
+  assertProvided(url, 'vkontakte');
+
+  return 'http://vk.com/share.php' + (0, _utils.objectToGetParams)({ url: url });
 }

@@ -79,3 +79,21 @@ export function getPinterestShareCount(shareUrl, callback) {
     callback(!!data ? data.count : undefined);
   });
 }
+
+export function getVkontakteShareCount(shareUrl, callback) {
+  const url = '//vk.com/share.php';
+
+  window.VK = {
+    Share: {
+      count(_, count) {
+        callback(!!count ? count : undefined);
+      }
+    }
+  };
+
+  return jsonp(url + objectToGetParams({
+    url: shareUrl,
+    act: 'count',
+    index: 0
+  }));
+}

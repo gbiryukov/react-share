@@ -154,4 +154,27 @@ var PinterestShareButton = _react2['default'].createClass({
       className: 'SocialMediaShareButton--pinterest' + (' ' + (this.props.className || '')) }));
   }
 });
+
 exports.PinterestShareButton = PinterestShareButton;
+var VkontakteShareButton = _react2['default'].createClass({
+  displayName: 'VkontakteShareButton',
+
+  propTypes: {
+    className: _react2['default'].PropTypes.string,
+    children: _react2['default'].PropTypes.node.isRequired,
+    title: _react2['default'].PropTypes.string.isRequired,
+    url: _react2['default'].PropTypes.string.isRequired
+  },
+
+  render: function render() {
+    var _props5 = this.props;
+    var url = _props5.url;
+    var title = _props5.title;
+
+    return _react2['default'].createElement(SocialMediaShareButton, _extends({
+      link: (0, _socialMediaShareLinks.vkontakte)(url, title)
+    }, this.props, {
+      className: 'SocialMediaShareButton--vkontakte' + (' ' + (this.props.className || '')) }));
+  }
+});
+exports.VkontakteShareButton = VkontakteShareButton;

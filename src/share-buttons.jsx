@@ -6,7 +6,8 @@ import {
   googlePlus,
   linkedin,
   pinterest,
-  twitter
+  twitter,
+  vkontakte
 } from './social-media-share-links';
 import { windowOpen } from './utils';
 
@@ -149,6 +150,30 @@ export const PinterestShareButton = React.createClass({
         link={pinterest(url, media)}
         {...this.props}
         className={'SocialMediaShareButton--pinterest' +
+          ` ${this.props.className || ''}`} />
+    );
+  }
+});
+
+export const VkontakteShareButton = React.createClass({
+  propTypes: {
+    className: React.PropTypes.string,
+    children: React.PropTypes.node.isRequired,
+    title: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
+  },
+
+  render() {
+    const {
+      url,
+      title
+    } = this.props;
+
+    return (
+      <SocialMediaShareButton
+        link={vkontakte(url, title)}
+        {...this.props}
+        className={'SocialMediaShareButton--vkontakte' +
           ` ${this.props.className || ''}`} />
     );
   }

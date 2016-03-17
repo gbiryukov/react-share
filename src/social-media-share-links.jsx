@@ -61,3 +61,9 @@ export function pinterest(url, media) {
     media
   });
 }
+
+export function vkontakte(url) {
+  assertProvided(url, 'vkontakte');
+
+  return `http://vk.com/share.php` + objectToGetParams({url});
+}
