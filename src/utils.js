@@ -35,3 +35,38 @@ export function windowOpen(url, name, height = 400, width = 550) {
     Object.keys(config).map(key => `${key}=${config[key]}`).join(', ')
   );
 }
+
+export function eventFactory() {
+  return {
+    _callbacks: {},
+    on(eventName, callback) {
+      if (typeof(callback) === 'function') {
+        if (!this._callbacks.hasOwnProperty(eventName)) {
+          this._callbacks[eventName] = [];
+        }
+
+        this._callbacks[eventName].push(callback);
+
+        return () => {
+          this.off(eventName, callback);
+        };
+      }
+    },
+    off(eventName, callback) {
+      if (typeof(callback) === 'function') {
+        if (this._callbacks.hasOwnProperty(eventName)) {
+          this._callbacks[eventName] = this._callbacks[eventName].filter(
+            cb => cb !== callback
+          );
+        }
+      }
+    },
+    trigger(eventName, eventData, context) {
+      if (this._callbacks.hasOwnProperty(eventName)) {
+        this._callbacks[eventName].forEach(cb =>
+          cb.call(context ? context : this, eventData)
+        );
+      }
+    }
+  };
+}

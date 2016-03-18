@@ -1,7 +1,7 @@
 import jsonp from 'jsonp';
 import platform from 'platform';
 
-import { objectToGetParams } from './utils';
+import { objectToGetParams, eventFactory } from './utils';
 
 
 export function getFacebookShareCount(shareUrl, callback) {
@@ -80,16 +80,21 @@ export function getPinterestShareCount(shareUrl, callback) {
   });
 }
 
+
+window.VK = {
+  Share: Object.assign({
+    count(_, count) {
+      this.trigger('updateCount', count);
+    }
+  }, eventFactory())
+};
+
 export function getVkontakteShareCount(shareUrl, callback) {
   const url = '//vk.com/share.php';
 
-  window.VK = {
-    Share: {
-      count(_, count) {
-        callback(!!count ? count : undefined);
-      }
-    }
-  };
+  window.VK.Share.on('updateCount', count => {
+    callback(!!count ? count : undefined);
+  });
 
   return jsonp(url + objectToGetParams({
     url: shareUrl,
@@ -98,15 +103,22 @@ export function getVkontakteShareCount(shareUrl, callback) {
   }));
 }
 
+
+window.ODKL = Object.assign({
+  updateCount(_, rowCount) {
+    const count = parseInt(rowCount, 10);
+    this.trigger('updateCount', count);
+  }
+}, eventFactory());
+
+// console.log(window.ODKL === window.VK.Share._call);
+
 export function getOdnoklassnikiShareCount(shareUrl, callback) {
   const url = '//connect.ok.ru/dk';
 
-  window.ODKL = {
-    updateCount(_, rowCount) {
-      const count = parseInt(rowCount, 10);
-      callback(!!count ? count : undefined);
-    }
-  };
+  window.ODKL.on('updateCount', count => {
+    callback(!!count ? count : undefined);
+  });
 
   return jsonp(url + objectToGetParams({
     ref: shareUrl,

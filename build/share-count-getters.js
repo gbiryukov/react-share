@@ -93,16 +93,20 @@ function getPinterestShareCount(shareUrl, callback) {
   });
 }
 
+window.VK = {
+  Share: Object.assign({
+    count: function count(_, _count) {
+      this.trigger('updateCount', _count);
+    }
+  }, (0, _utils.eventFactory)())
+};
+
 function getVkontakteShareCount(shareUrl, callback) {
   var url = '//vk.com/share.php';
 
-  window.VK = {
-    Share: {
-      count: function count(_, _count) {
-        callback(!!_count ? _count : undefined);
-      }
-    }
-  };
+  window.VK.Share.on('updateCount', function (count) {
+    callback(!!count ? count : undefined);
+  });
 
   return (0, _jsonp2['default'])(url + (0, _utils.objectToGetParams)({
     url: shareUrl,
@@ -111,15 +115,21 @@ function getVkontakteShareCount(shareUrl, callback) {
   }));
 }
 
+window.ODKL = Object.assign({
+  updateCount: function updateCount(_, rowCount) {
+    var count = parseInt(rowCount, 10);
+    this.trigger('updateCount', count);
+  }
+}, (0, _utils.eventFactory)());
+
+// console.log(window.ODKL === window.VK.Share._call);
+
 function getOdnoklassnikiShareCount(shareUrl, callback) {
   var url = '//connect.ok.ru/dk';
 
-  window.ODKL = {
-    updateCount: function updateCount(_, rowCount) {
-      var count = parseInt(rowCount, 10);
-      callback(!!count ? count : undefined);
-    }
-  };
+  window.ODKL.on('updateCount', function (count) {
+    callback(!!count ? count : undefined);
+  });
 
   return (0, _jsonp2['default'])(url + (0, _utils.objectToGetParams)({
     ref: shareUrl,

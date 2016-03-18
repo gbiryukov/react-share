@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.objectToGetParams = objectToGetParams;
 exports.windowOpen = windowOpen;
+exports.eventFactory = eventFactory;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -46,4 +47,43 @@ function windowOpen(url, name) {
   return window.open(url, _platform2['default'].name === 'IE' && parseInt(_platform2['default'].version, 10) < 10 ? '' : name, Object.keys(config).map(function (key) {
     return key + '=' + config[key];
   }).join(', '));
+}
+
+function eventFactory() {
+  return {
+    _callbacks: {},
+    on: function on(eventName, callback) {
+      var _this = this;
+
+      if (typeof callback === 'function') {
+        if (!this._callbacks.hasOwnProperty(eventName)) {
+          this._callbacks[eventName] = [];
+        }
+
+        this._callbacks[eventName].push(callback);
+
+        return function () {
+          _this.off(eventName, callback);
+        };
+      }
+    },
+    off: function off(eventName, callback) {
+      if (typeof callback === 'function') {
+        if (this._callbacks.hasOwnProperty(eventName)) {
+          this._callbacks[eventName] = this._callbacks[eventName].filter(function (cb) {
+            return cb !== callback;
+          });
+        }
+      }
+    },
+    trigger: function trigger(eventName, eventData, context) {
+      var _this2 = this;
+
+      if (this._callbacks.hasOwnProperty(eventName)) {
+        this._callbacks[eventName].forEach(function (cb) {
+          return cb.call(context ? context : _this2, eventData);
+        });
+      }
+    }
+  };
 }

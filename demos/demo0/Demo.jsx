@@ -117,6 +117,36 @@ const Demo = React.createClass({
         </div>
 
         <div className="Demo__some-network">
+          <VkontakteShareButton
+            url={shareUrl}
+            title={title}
+            className="Demo__some-network__share-button">
+            <button>vk</button>
+          </VkontakteShareButton>
+
+          <VkontakteShareCount
+            url={shareUrl}
+            className="Demo__some-network__share-count">
+            {count => count}
+          </VkontakteShareCount>
+        </div>
+
+        <div className="Demo__some-network">
+          <OdnoklassnikiShareButton
+            url={shareUrl}
+            title={title}
+            className="Demo__some-network__share-button">
+            <button>ok</button>
+          </OdnoklassnikiShareButton>
+
+          <OdnoklassnikiShareCount
+            url={shareUrl}
+            className="Demo__some-network__share-count">
+            {count => count}
+          </OdnoklassnikiShareCount>
+        </div>
+
+        <div className="Demo__some-network">
           <OdnoklassnikiShareButton
             url={shareUrl}
             title={title}
