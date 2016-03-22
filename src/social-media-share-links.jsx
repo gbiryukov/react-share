@@ -39,6 +39,12 @@ export function facebook(url) {
   return `https://facebook.com/sharer.php` + objectToGetParams({u: url});
 }
 
+export function facebookWithParams(params) {
+  assertProvided(params, 'facebook');
+
+  return `https://www.facebook.com/dialog/feed` + objectToGetParams(params);
+}
+
 export function googlePlus(url) {
   assertProvided(url, 'googlePlus');
 
@@ -62,10 +68,10 @@ export function pinterest(url, media) {
   });
 }
 
-export function vkontakte(url) {
-  assertProvided(url, 'vkontakte');
+export function vkontakte(params) {
+  assertProvided(params, 'vkontakte');
 
-  return `http://vk.com/share.php` + objectToGetParams({url});
+  return `http://vk.com/share.php` + objectToGetParams(params);
 }
 
 export function odnoklassniki(url) {

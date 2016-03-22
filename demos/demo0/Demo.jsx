@@ -31,15 +31,19 @@ const LinkedinIcon = generateShareIcon('linkedin');
 
 const Demo = React.createClass({
   render() {
-    const shareUrl = 'http://github.com';
-    const title = 'GitHub';
+    const config = {
+      url: 'http://github.com',
+      title: 'GitHub custom title',
+      description: 'Custom description text here',
+      image: 'https://cdn.tinypng.com/images/panda-chewing.png'
+    };
 
     return (
       <div className="Demo__container">
         <div className="Demo__some-network">
           <FacebookShareButton
-            url={shareUrl}
-            title={title}
+            appId={499643536889202}
+            {...config}
             className="Demo__some-network__share-button">
             <FacebookIcon
               size={32}
@@ -47,7 +51,7 @@ const Demo = React.createClass({
           </FacebookShareButton>
 
           <FacebookShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </FacebookShareCount>
@@ -55,8 +59,7 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <TwitterShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <TwitterIcon
               size={32}
@@ -70,7 +73,7 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <GooglePlusShareButton
-            url={shareUrl}
+            {...config}
             className="Demo__some-network__share-button">
             <GooglePlusIcon
               size={32}
@@ -78,7 +81,7 @@ const Demo = React.createClass({
           </GooglePlusShareButton>
 
           <GooglePlusShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </GooglePlusShareCount>
@@ -86,8 +89,7 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <LinkedinShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <LinkedinIcon
               size={32}
@@ -95,7 +97,7 @@ const Demo = React.createClass({
           </LinkedinShareButton>
 
           <LinkedinShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </LinkedinShareCount>
@@ -103,14 +105,13 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <VkontakteShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <button>vk</button>
           </VkontakteShareButton>
 
           <VkontakteShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </VkontakteShareCount>
@@ -118,14 +119,13 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <VkontakteShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <button>vk</button>
           </VkontakteShareButton>
 
           <VkontakteShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </VkontakteShareCount>
@@ -133,14 +133,13 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <OdnoklassnikiShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <button>ok</button>
           </OdnoklassnikiShareButton>
 
           <OdnoklassnikiShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </OdnoklassnikiShareCount>
@@ -148,14 +147,13 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <OdnoklassnikiShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <button>ok</button>
           </OdnoklassnikiShareButton>
 
           <OdnoklassnikiShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </OdnoklassnikiShareCount>
@@ -163,14 +161,13 @@ const Demo = React.createClass({
 
         <div className="Demo__some-network">
           <MyMailShareButton
-            url={shareUrl}
-            title={title}
+            {...config}
             className="Demo__some-network__share-button">
             <button>my.mail.ru</button>
           </MyMailShareButton>
 
           <MyMailShareCount
-            url={shareUrl}
+            url={config.url}
             className="Demo__some-network__share-count">
             {count => count}
           </MyMailShareCount>

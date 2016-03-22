@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
   facebook,
+  facebookWithParams,
   googlePlus,
   linkedin,
   pinterest,
@@ -18,8 +19,7 @@ const SocialMediaShareButton = React.createClass({
   propTypes: {
     children: React.PropTypes.node.isRequired,
     className: React.PropTypes.string,
-    link: React.PropTypes.node.isRequired,
-    url: React.PropTypes.string.isRequired
+    link: React.PropTypes.node.isRequired
   },
 
   onClick() {
@@ -43,19 +43,44 @@ export const FacebookShareButton = React.createClass({
   propTypes: {
     className: React.PropTypes.string,
     children: React.PropTypes.node.isRequired,
-    title: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired
+    url: React.PropTypes.string.isRequired,
+    appId: React.PropTypes.number,
+    image: React.PropTypes.string,
+    title: React.PropTypes.string,
+    description: React.PropTypes.string
   },
 
   render() {
-    const {
-      url,
-      title
-    } = this.props;
+    const { url } = this.props;
+
+    let shareDialogUrl;
+
+    if (this.props.appId) {
+      const shareParams = {
+        appId: this.props.appId,
+        link: url
+      };
+
+      if (this.props.title) {
+        shareParams.title = this.props.title;
+      }
+
+      if (this.props.description) {
+        shareParams.description = this.props.description;
+      }
+
+      if (this.props.image) {
+        shareParams.picture = this.props.image;
+      }
+
+      shareDialogUrl = facebookWithParams(shareParams);
+    } else {
+      shareDialogUrl = facebook(url);
+    }
 
     return (
       <SocialMediaShareButton
-        link={facebook(url, title)}
+        link={shareDialogUrl}
         {...this.props}
         className={'SocialMediaShareButton--facebook' +
           ` ${this.props.className || ''}`} />
@@ -162,18 +187,31 @@ export const VkontakteShareButton = React.createClass({
     className: React.PropTypes.string,
     children: React.PropTypes.node.isRequired,
     title: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired
+    url: React.PropTypes.string.isRequired,
+    image: React.PropTypes.string,
+    description: React.PropTypes.string
   },
 
   render() {
-    const {
-      url,
-      title
-    } = this.props;
+    const shareParams = {
+      url: this.props.url
+    };
+
+    if (this.props.title) {
+      shareParams.title = this.props.title;
+    }
+
+    if (this.props.description) {
+      shareParams.description = this.props.description;
+    }
+
+    if (this.props.image) {
+      shareParams.image = this.props.image;
+    }
 
     return (
       <SocialMediaShareButton
-        link={vkontakte(url, title)}
+        link={vkontakte(shareParams)}
         {...this.props}
         className={'SocialMediaShareButton--vkontakte' +
           ` ${this.props.className || ''}`} />
