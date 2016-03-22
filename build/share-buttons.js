@@ -23,8 +23,7 @@ var SocialMediaShareButton = _react2['default'].createClass({
   propTypes: {
     children: _react2['default'].PropTypes.node.isRequired,
     className: _react2['default'].PropTypes.string,
-    link: _react2['default'].PropTypes.node.isRequired,
-    url: _react2['default'].PropTypes.string.isRequired
+    link: _react2['default'].PropTypes.node.isRequired
   },
 
   onClick: function onClick() {
@@ -50,17 +49,43 @@ var FacebookShareButton = _react2['default'].createClass({
   propTypes: {
     className: _react2['default'].PropTypes.string,
     children: _react2['default'].PropTypes.node.isRequired,
-    title: _react2['default'].PropTypes.string.isRequired,
-    url: _react2['default'].PropTypes.string.isRequired
+    url: _react2['default'].PropTypes.string.isRequired,
+    appId: _react2['default'].PropTypes.number,
+    image: _react2['default'].PropTypes.string,
+    title: _react2['default'].PropTypes.string,
+    description: _react2['default'].PropTypes.string
   },
 
   render: function render() {
-    var _props = this.props;
-    var url = _props.url;
-    var title = _props.title;
+    var url = this.props.url;
+
+    var shareDialogUrl = undefined;
+
+    if (this.props.appId) {
+      var shareParams = {
+        appId: this.props.appId,
+        link: url
+      };
+
+      if (this.props.title) {
+        shareParams.title = this.props.title;
+      }
+
+      if (this.props.description) {
+        shareParams.description = this.props.description;
+      }
+
+      if (this.props.image) {
+        shareParams.picture = this.props.image;
+      }
+
+      shareDialogUrl = (0, _socialMediaShareLinks.facebookWithParams)(shareParams);
+    } else {
+      shareDialogUrl = (0, _socialMediaShareLinks.facebook)(url);
+    }
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
-      link: (0, _socialMediaShareLinks.facebook)(url, title)
+      link: shareDialogUrl
     }, this.props, {
       className: 'SocialMediaShareButton--facebook' + (' ' + (this.props.className || '')) }));
   }
@@ -78,9 +103,9 @@ var TwitterShareButton = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _props2 = this.props;
-    var url = _props2.url;
-    var title = _props2.title;
+    var _props = this.props;
+    var url = _props.url;
+    var title = _props.title;
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
       link: (0, _socialMediaShareLinks.twitter)(url, title)
@@ -121,9 +146,9 @@ var LinkedinShareButton = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _props3 = this.props;
-    var url = _props3.url;
-    var title = _props3.title;
+    var _props2 = this.props;
+    var url = _props2.url;
+    var title = _props2.title;
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
       link: (0, _socialMediaShareLinks.linkedin)(url, title)
@@ -144,9 +169,9 @@ var PinterestShareButton = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _props4 = this.props;
-    var url = _props4.url;
-    var media = _props4.media;
+    var _props3 = this.props;
+    var url = _props3.url;
+    var media = _props3.media;
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
       link: (0, _socialMediaShareLinks.pinterest)(url, media)
@@ -162,17 +187,31 @@ var VkontakteShareButton = _react2['default'].createClass({
   propTypes: {
     className: _react2['default'].PropTypes.string,
     children: _react2['default'].PropTypes.node.isRequired,
-    title: _react2['default'].PropTypes.string.isRequired,
-    url: _react2['default'].PropTypes.string.isRequired
+    url: _react2['default'].PropTypes.string.isRequired,
+    title: _react2['default'].PropTypes.string,
+    image: _react2['default'].PropTypes.string,
+    description: _react2['default'].PropTypes.string
   },
 
   render: function render() {
-    var _props5 = this.props;
-    var url = _props5.url;
-    var title = _props5.title;
+    var shareParams = {
+      url: this.props.url
+    };
+
+    if (this.props.title) {
+      shareParams.title = this.props.title;
+    }
+
+    if (this.props.description) {
+      shareParams.description = this.props.description;
+    }
+
+    if (this.props.image) {
+      shareParams.image = this.props.image;
+    }
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
-      link: (0, _socialMediaShareLinks.vkontakte)(url, title)
+      link: (0, _socialMediaShareLinks.vkontakte)(shareParams)
     }, this.props, {
       className: 'SocialMediaShareButton--vkontakte' + (' ' + (this.props.className || '')) }));
   }
@@ -190,9 +229,9 @@ var OdnoklassnikiShareButton = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _props6 = this.props;
-    var url = _props6.url;
-    var title = _props6.title;
+    var _props4 = this.props;
+    var url = _props4.url;
+    var title = _props4.title;
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
       link: (0, _socialMediaShareLinks.odnoklassniki)(url, title)
@@ -208,17 +247,31 @@ var MyMailShareButton = _react2['default'].createClass({
   propTypes: {
     className: _react2['default'].PropTypes.string,
     children: _react2['default'].PropTypes.node.isRequired,
-    title: _react2['default'].PropTypes.string.isRequired,
-    url: _react2['default'].PropTypes.string.isRequired
+    url: _react2['default'].PropTypes.string.isRequired,
+    title: _react2['default'].PropTypes.string,
+    image: _react2['default'].PropTypes.string,
+    description: _react2['default'].PropTypes.string
   },
 
   render: function render() {
-    var _props7 = this.props;
-    var url = _props7.url;
-    var title = _props7.title;
+    var shareParams = {
+      url: this.props.url
+    };
+
+    if (this.props.title) {
+      shareParams.title = this.props.title;
+    }
+
+    if (this.props.description) {
+      shareParams.description = this.props.description;
+    }
+
+    if (this.props.image) {
+      shareParams.image_url = this.props.image;
+    }
 
     return _react2['default'].createElement(SocialMediaShareButton, _extends({
-      link: (0, _socialMediaShareLinks.myMail)(url, title)
+      link: (0, _socialMediaShareLinks.myMail)(shareParams)
     }, this.props, {
       className: 'SocialMediaShareButton--mymail' + (' ' + (this.props.className || '')) }));
   }

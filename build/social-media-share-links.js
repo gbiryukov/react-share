@@ -6,6 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 exports.email = email;
 exports.twitter = twitter;
 exports.facebook = facebook;
+exports.facebookWithParams = facebookWithParams;
 exports.googlePlus = googlePlus;
 exports.linkedin = linkedin;
 exports.pinterest = pinterest;
@@ -55,6 +56,12 @@ function facebook(url) {
   return 'https://facebook.com/sharer.php' + (0, _utils.objectToGetParams)({ u: url });
 }
 
+function facebookWithParams(params) {
+  assertProvided(params, 'facebook');
+
+  return 'https://www.facebook.com/dialog/feed' + (0, _utils.objectToGetParams)(params);
+}
+
 function googlePlus(url) {
   assertProvided(url, 'googlePlus');
 
@@ -78,10 +85,10 @@ function pinterest(url, media) {
   });
 }
 
-function vkontakte(url) {
-  assertProvided(url, 'vkontakte');
+function vkontakte(params) {
+  assertProvided(params, 'vkontakte');
 
-  return 'http://vk.com/share.php' + (0, _utils.objectToGetParams)({ url: url });
+  return 'http://vk.com/share.php' + (0, _utils.objectToGetParams)(params);
 }
 
 function odnoklassniki(url) {
@@ -95,8 +102,8 @@ function odnoklassniki(url) {
   return 'http://www.odnoklassniki.ru/dk' + (0, _utils.objectToGetParams)(params);
 }
 
-function myMail(url) {
-  assertProvided(url, 'myMail');
+function myMail(params) {
+  assertProvided(params, 'myMail');
 
-  return '//connect.mail.ru/share' + (0, _utils.objectToGetParams)({ url: url });
+  return '//connect.mail.ru/share' + (0, _utils.objectToGetParams)(params);
 }
