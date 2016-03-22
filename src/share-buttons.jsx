@@ -186,8 +186,8 @@ export const VkontakteShareButton = React.createClass({
   propTypes: {
     className: React.PropTypes.string,
     children: React.PropTypes.node.isRequired,
-    title: React.PropTypes.string.isRequired,
     url: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string,
     image: React.PropTypes.string,
     description: React.PropTypes.string
   },
@@ -247,19 +247,32 @@ export const MyMailShareButton = React.createClass({
   propTypes: {
     className: React.PropTypes.string,
     children: React.PropTypes.node.isRequired,
-    title: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired
+    url: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string,
+    image: React.PropTypes.string,
+    description: React.PropTypes.string
   },
 
   render() {
-    const {
-      url,
-      title
-    } = this.props;
+    const shareParams = {
+      url: this.props.url
+    };
+
+    if (this.props.title) {
+      shareParams.title = this.props.title;
+    }
+
+    if (this.props.description) {
+      shareParams.description = this.props.description;
+    }
+
+    if (this.props.image) {
+      shareParams.image_url = this.props.image;
+    }
 
     return (
       <SocialMediaShareButton
-        link={myMail(url, title)}
+        link={myMail(shareParams)}
         {...this.props}
         className={'SocialMediaShareButton--mymail' +
           ` ${this.props.className || ''}`} />
